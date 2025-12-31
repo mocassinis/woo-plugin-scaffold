@@ -44,7 +44,7 @@ module.exports = function( grunt ) {
 				src: '**',
 				dest: BUILD_DIR + '<%= pkg.name %>/' + JS_DIR,
 			},
-			php: {
+			src: {
 				expand: true,
 				cwd: SRC_DIR,
 				src: '**',
