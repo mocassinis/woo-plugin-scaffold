@@ -18,7 +18,7 @@ module.exports = function( grunt ) {
 				files: [
 					CSS_DIR + '**',
 					JS_DIR + '**',
-					PHP_DIR + '**',
+					SRC_DIR + '**',
 					'<%= pkg.name %>.php'
 				],
 				tasks: ['clean:all', 'copy:all'],
@@ -46,9 +46,9 @@ module.exports = function( grunt ) {
 			},
 			php: {
 				expand: true,
-				cwd: PHP_DIR,
+				cwd: SRC_DIR,
 				src: '**',
-				dest: BUILD_DIR + '<%= pkg.name %>/' + PHP_DIR,
+				dest: BUILD_DIR + '<%= pkg.name %>/' + SRC_DIR,
 			},
 			autoload: {
 				src: VENDOR_DIR + 'autoload.php',
