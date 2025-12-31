@@ -2,7 +2,7 @@ module.exports = function( grunt ) {
 	var BUILD_DIR  = 'build/',
 		CSS_DIR    = 'css/',
 		JS_DIR     = 'js/',
-		PHP_DIR    = 'php/',
+		SRC_DIR    = 'src/',
 		VENDOR_DIR = 'vendor/';
 
 	grunt.initConfig({
@@ -87,7 +87,7 @@ module.exports = function( grunt ) {
 			'copy:plugin',
 			'copy:css',
 			'copy:js',
-			'copy:php',
+			'copy:src',
 			'copy:autoload',
 			'copy:composer'
 		]
