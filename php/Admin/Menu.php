@@ -3,7 +3,7 @@
 /**
  * Set namespace.
  */
-namespace Xkon\Plugin_Tpl\Admin;
+namespace Nevma\Plugin_Tpl\Admin;
 
 /**
  * Check that the file is not accessed directly.
@@ -23,7 +23,7 @@ class Menu {
 		add_action(
 			'admin_menu',
 			array(
-				'\\Xkon\\Plugin_Tpl\\Admin\\Menu',
+				'\\Nevma\\Plugin_Tpl\\Admin\\Menu',
 				'populate',
 			)
 		);
@@ -38,7 +38,7 @@ class Menu {
 			'Plugin Tpl',
 			'manage_options',
 			'plugin-tpl',
-			array( '\\Xkon\\Plugin_Tpl\\Admin\\Page', 'load' ),
+			array( '\\Nevma\\Plugin_Tpl\\Admin\\Page', 'load' ),
 			'dashicons-yes-alt'
 		);
 	}

@@ -3,7 +3,7 @@
 /**
  * Set namespace.
  */
-namespace Xkon\Plugin_Tpl\REST;
+namespace Nevma\Plugin_Tpl\REST;
 
 /**
  * Import necessary classes.

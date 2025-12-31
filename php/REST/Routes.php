@@ -3,7 +3,7 @@
 /**
  * Set namespace.
  */
-namespace Xkon\Plugin_Tpl\REST;
+namespace Nevma\Plugin_Tpl\REST;
 
 /**
  * Import necessary classes.
@@ -30,7 +30,7 @@ class Routes {
 			'/hello',
 			array(
 				'methods'             => \WP_REST_Server::EDITABLE,
-				'callback'            => array( '\\Xkon\\Plugin_Tpl\\REST\\Functions', 'hello' ),
+				'callback'            => array( '\\Nevma\\Plugin_Tpl\\REST\\Functions', 'hello' ),
 				'permission_callback' => function () {
 					return current_user_can( 'manage_options' );
 				},

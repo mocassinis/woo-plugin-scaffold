@@ -3,7 +3,7 @@
 /**
  * Set namespace.
  */
-namespace Xkon\Plugin_Tpl;
+namespace Nevma\Plugin_Tpl;
 
 /**
  * Check that the file is not accessed directly.

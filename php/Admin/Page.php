@@ -3,12 +3,12 @@
 /**
  * Set namespace.
  */
-namespace Xkon\Plugin_Tpl\Admin;
+namespace Nevma\Plugin_Tpl\Admin;
 
 /**
  * Import necessary classes.
  */
-use Xkon\Plugin_Tpl\Logger;
+use Nevma\Plugin_Tpl\Logger;
 
 /**
  * Check that the file is not accessed directly.

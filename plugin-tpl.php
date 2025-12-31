@@ -35,12 +35,12 @@
 /**
  * Set namespace.
  */
-namespace Xkon;
+namespace Nevma;
 
 /**
  * Import necessary classes.
  */
-use Xkon\Plugin_Tpl\Admin\Menu;
+use Nevma\Plugin_Tpl\Admin\Menu;
 
 /**
  * Check that the file is not accessed directly.
@@ -131,7 +131,7 @@ class Plugin_Tpl {
 		add_action( 'admin_enqueue_scripts', array( $this, 'styles_and_scripts' ) );
 
 		// Add Rest API endpoints.
-		add_action( 'rest_api_init', array( '\\Xkon\\Plugin_Tpl\\REST\\Routes', 'register' ) );
+		add_action( 'rest_api_init', array( '\\Nevma\\Plugin_Tpl\\REST\\Routes', 'register' ) );
 	}
 
 	/**
@@ -203,19 +203,19 @@ class Plugin_Tpl {
 /**
  * Activation Hook.
  */
-register_activation_hook( __FILE__, array( '\\Xkon\\Plugin_Tpl', 'on_plugin_activation' ) );
+register_activation_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl', 'on_plugin_activation' ) );
 
 /**
  * Dectivation Hook.
  */
-register_deactivation_hook( __FILE__, array( '\\Xkon\\Plugin_Tpl', 'on_plugin_deactivation' ) );
+register_deactivation_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl', 'on_plugin_deactivation' ) );
 
 /**
  * Uninstall Hook.
  */
-register_uninstall_hook( __FILE__, array( '\\Xkon\\Plugin_Tpl', 'on_plugin_uninstall' ) );
+register_uninstall_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl', 'on_plugin_uninstall' ) );
 
 /**
  * Load plugin.
  */
-add_action( 'plugins_loaded', array( '\\Xkon\\Plugin_Tpl', 'get_instance' ) );
+add_action( 'plugins_loaded', array( '\\Nevma\\Plugin_Tpl', 'get_instance' ) );

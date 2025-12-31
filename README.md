@@ -26,7 +26,7 @@ This template provides a solid foundation for WooCommerce extensions with proper
 
 4. Update plugin headers and metadata in:
    - `plugin-tpl.php` (add WooCommerce version headers)
-   - `composer.json`
+   - `composer.json` (update namespace in autoload section)
    - `package.json`
 
 **Note:** This template is designed for WooCommerce plugin development and includes HPOS (High-Performance Order Storage) compatibility.
@@ -68,7 +68,7 @@ define( 'PLUGIN_TPL_DEBUG', true );
 
 **Usage:**
 ```php
-use Xkon\Plugin_Tpl\Logger;
+use Nevma\Plugin_Tpl\Logger;
 
 Logger::log( 'Message' );           // Default info level
 Logger::debug( 'Debug info' );      // Debug level
