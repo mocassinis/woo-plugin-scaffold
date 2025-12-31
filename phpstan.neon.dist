@@ -1,0 +1,30 @@
+parameters:
+	level: 5
+	paths:
+		- php/
+		- plugin-tpl.php
+
+	# WordPress and WooCommerce stubs
+	bootstrapFiles:
+		- vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+		- vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+
+	# Exclude patterns
+	excludePaths:
+		- vendor/
+		- node_modules/
+		- build/
+
+	# Ignore errors
+	ignoreErrors:
+		# WordPress specific
+		- '#Function apply_filters(_ref_array)? invoked with#'
+		- '#Function do_action(_ref_array)? invoked with#'
+		- '#Function add_(meta_)?box invoked with#'
+
+	# Check for unused parameters
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
+
+	# Type coverage
+	reportUnmatchedIgnoredErrors: false

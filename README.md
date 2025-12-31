@@ -32,18 +32,30 @@ This template provides a solid foundation for WooCommerce extensions with proper
 **Note:** This template is designed for WooCommerce plugin development and includes HPOS (High-Performance Order Storage) compatibility.
 
 #### Available commands
-- `npm run lint` - Runs all lints.
-	- `php:lint` - Lints all `.php` files.
-	- `css:lint` - Lints all css files inside the `css` directory.
-	- `js:lint` - Lints all css files inside the `js` directory.
-- `npm run fix` - Runs all fixes.
-	- `php:fix`  - Fixes all `.php` files.
-	- `css:fix` - Fixes any issues inside the `css` directory.
-	- `js:fix` - Fixes any issues inside the `js` directory.
-- `php:compat` - Checks all `.php` files inside the `src` directory for compatibility with PHP 7.0+.
-- `npm run copy` - Copies `css`, `js`, `php`, `vendor` directories & `{plugin-name}.php` into `build/{plugin-name}` directory.
-- `npm run watch` - Watches for file changes and runs `npm run copy`.
-- `npm run build` - Runs `npm run copy` and creates a `{plugin-name}.zip` inside the `build` directory.
+
+**PHP Quality Tools:**
+- `composer lint` - Run all PHP linters (syntax + PHPCS)
+- `composer lint:php` - Check PHP syntax errors
+- `composer lint:phpcs` - Check WordPress/WooCommerce coding standards
+- `composer fix` - Auto-fix coding standard violations
+- `composer analyze` - Run PHPStan static analysis
+- `composer compat` - Check PHP 7.4+ compatibility
+- `composer make-pot` - Generate translation POT file
+
+**JavaScript/CSS:**
+- `npm run lint` - Run all linters (PHP, CSS, JS)
+	- `npm run php:lint` - Lint PHP files via Composer
+	- `npm run css:lint` - Lint CSS files
+	- `npm run js:lint` - Lint JavaScript files
+- `npm run fix` - Auto-fix all files
+	- `npm run php:fix` - Fix PHP files
+	- `npm run css:fix` - Fix CSS files
+	- `npm run js:fix` - Fix JavaScript files
+
+**Build Tools:**
+- `npm run copy` - Copy files to `build/{plugin-name}/` directory
+- `npm run watch` - Watch for changes and auto-copy
+- `npm run build` - Create production `.zip` file
 
 #### Debug Logging
 
@@ -80,4 +92,30 @@ This template is compatible with WooCommerce High-Performance Order Storage (HPO
 - Use WooCommerce CRUD methods: `$order->get_meta()`, `$order->update_meta_data()`, `$order->save()`
 - Never use `get_post_meta()` or `update_post_meta()` for order data
 - Use `wc_get_orders()` instead of `WP_Query` for querying orders
+
+#### Modern Development Tools
+
+**Code Quality:**
+- ✅ **WooCommerce Coding Standards** - Via `woocommerce/woocommerce-sniffs`
+- ✅ **WordPress Coding Standards** - Latest WPCS 3.0+
+- ✅ **PHPStan Static Analysis** - Level 5 with WordPress/WooCommerce stubs
+- ✅ **PHP 7.4+ Compatibility** - Modern PHP features supported
+- ✅ **Security Rules** - Nonce verification, sanitization, and escaping checks
+
+**What's Included:**
+```bash
+# Check code quality
+composer lint              # All checks
+composer analyze           # Static analysis
+composer compat            # PHP compatibility
+
+# Auto-fix issues
+composer fix               # Fix coding standards
+```
+
+**PHPStan Configuration:**
+- Level 5 analysis (balanced strictness)
+- WordPress and WooCommerce stubs included
+- Ignores common WordPress false positives
+- See `phpstan.neon.dist` for configuration
 

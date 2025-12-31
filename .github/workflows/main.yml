@@ -1,46 +1,90 @@
-name: Checks
+name: Code Quality Checks
+
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  phpcs:
+  php-linting:
+    name: PHP Linting
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          ref: 'main'
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
           coverage: none
+          tools: composer
 
-      - name: Setup PHP_CodeSniffer
-        run: |
-          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-          export SNIFFS_DIR=/tmp/sniffs
-          git clone -b master --depth 1 https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $SNIFFS_DIR
-          git clone -b master --depth 1 https://github.com/PHPCompatibility/PHPCompatibility.git $SNIFFS_DIR/PHPCompatibility
-          git clone -b master --depth 1 https://github.com/PHPCompatibility/PHPCompatibilityWP.git $SNIFFS_DIR/PHPCompatibilityWP
-          git clone -b master --depth 1 https://github.com/PHPCompatibility/PHPCompatibilityParagonie.git $SNIFFS_DIR/PHPCompatibilityParagonie
-          php phpcs.phar --config-set installed_paths $SNIFFS_DIR,$SNIFFS_DIR/PHPCompatibility,$SNIFFS_DIR/PHPCompatibilityWP,$SNIFFS_DIR/PHPCompatibilityParagonie
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
-      - name: Log debug information
-        run: |
-          php --version
-          php phpcs.phar --version
-          php phpcs.phar -i
+      - name: PHP Syntax Check
+        run: composer lint:php
 
-      - name: PHP Syntax
-        run: find . \( -name '*.php' \) -exec php -lf {} \;
+  coding-standards:
+    name: Coding Standards
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: PHP Compatibility 7.0+
-        run: |
-          php phpcs.phar -p -s -v -n . --standard=phpcompat.xml.dist
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+          tools: composer
 
-      - name: Coding Standards
-        run: |
-          php phpcs.phar -p -s -v -n . --standard=phpcs.xml.dist
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: WordPress/WooCommerce Coding Standards
+        run: composer lint:phpcs
+
+  static-analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: PHPStan Analysis
+        run: composer analyze
+
+  php-compatibility:
+    name: PHP Compatibility
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Check PHP 7.4+ Compatibility
+        run: composer compat

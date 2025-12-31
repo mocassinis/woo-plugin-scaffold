@@ -5,8 +5,8 @@
  * Plugin URI:        https://github.com/mrxkon/plugin-tpl
  * Description:       Plugin - Template
  * Version:           1.0.0
- * Required at least: 5.0
- * Requires PHP:      7.0
+ * Required at least: 5.6
+ * Requires PHP:      7.4
  * WC requires at least: 6.0
  * WC tested up to:   9.5
  * Author:            Konstantinos Xenos
