@@ -159,7 +159,7 @@ class Plugin_Tpl {
 			true
 		);
 
-		wp_localize_script(
+		wp_localize_script     (
 			'plugin-tpl',
 			'plugin_tpl_globals',
 			array(
