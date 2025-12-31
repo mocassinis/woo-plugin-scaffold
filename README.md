@@ -1,6 +1,8 @@
-## plugin-tpl
+## WooCommerce Plugin Template
 
-Re-creating the same setup every time is annoying so I thought of creating an easy to use (for me at least :D) template.
+A modern, well-structured scaffold for building WooCommerce plugins with WordPress best practices built in.
+
+This template provides a solid foundation for WooCommerce extensions with proper code organization, linting, and build tools configured out of the box.
 
 ---
 
@@ -10,9 +12,24 @@ Re-creating the same setup every time is annoying so I thought of creating an ea
 
 #### Setup
 
-`composer install && npm install`
+1. Install dependencies:
+   ```bash
+   composer install && npm install
+   ```
 
-Search and replace the instances of `plugin-tpl`
+2. Search and replace throughout the codebase:
+   - `plugin-tpl` → your plugin slug
+   - `Plugin_Tpl` → your plugin class name
+   - `plugin_tpl` → your function/variable prefix
+
+3. Enable WooCommerce dependency check by uncommenting lines 125-138 in `plugin-tpl.php`
+
+4. Update plugin headers and metadata in:
+   - `plugin-tpl.php` (add WooCommerce version headers)
+   - `composer.json`
+   - `package.json`
+
+**Note:** This template is designed for WooCommerce plugin development.
 
 #### Available commands
 - `npm run lint` - Runs all lints.
@@ -27,3 +44,4 @@ Search and replace the instances of `plugin-tpl`
 - `npm run copy` - Copies `css`, `js`, `php`, `vendor` directories & `{plugin-name}.php` into `build/{plugin-name}` directory.
 - `npm run watch` - Watches for file changes and runs `npm run copy`.
 - `npm run build` - Runs `npm run copy` and creates a `{plugin-name}.zip` inside the `build` directory.
+
