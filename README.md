@@ -29,7 +29,7 @@ This template provides a solid foundation for WooCommerce extensions with proper
    - `composer.json`
    - `package.json`
 
-**Note:** This template is designed for WooCommerce plugin development.
+**Note:** This template is designed for WooCommerce plugin development and includes HPOS (High-Performance Order Storage) compatibility.
 
 #### Available commands
 - `npm run lint` - Runs all lints.
@@ -66,4 +66,18 @@ Logger::error( 'Error occurred' );  // Error level
 ```
 
 **View logs:** WooCommerce > Status > Logs (look for source: `plugin-tpl`)
+
+#### HPOS Compatibility
+
+This template is compatible with WooCommerce High-Performance Order Storage (HPOS).
+
+**What's included:**
+- HPOS compatibility declaration in the main plugin file
+- WooCommerce version headers (`WC requires at least`, `WC tested up to`)
+
+**Important for development:**
+- Always use `wc_get_order()` to retrieve orders
+- Use WooCommerce CRUD methods: `$order->get_meta()`, `$order->update_meta_data()`, `$order->save()`
+- Never use `get_post_meta()` or `update_post_meta()` for order data
+- Use `wc_get_orders()` instead of `WP_Query` for querying orders
 

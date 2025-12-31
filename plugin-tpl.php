@@ -7,6 +7,8 @@
  * Version:           1.0.0
  * Required at least: 5.0
  * Requires PHP:      7.0
+ * WC requires at least: 6.0
+ * WC tested up to:   9.5
  * Author:            Konstantinos Xenos
  * Author URI:        https://xkon.dev
  * License:           GPLv2 or later
@@ -46,6 +48,22 @@ use Xkon\Plugin_Tpl\Admin\Menu;
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Sorry, but you can not directly access this file.' );
 }
+
+/**
+ * Declare HPOS compatibility.
+ */
+add_action(
+	'before_woocommerce_init',
+	function() {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+				'custom_order_tables',
+				__FILE__,
+				true
+			);
+		}
+	}
+);
 
 /**
  * Class Plugin_Tpl.
