@@ -45,3 +45,25 @@ This template provides a solid foundation for WooCommerce extensions with proper
 - `npm run watch` - Watches for file changes and runs `npm run copy`.
 - `npm run build` - Runs `npm run copy` and creates a `{plugin-name}.zip` inside the `build` directory.
 
+#### Debug Logging
+
+The template includes a Logger class that uses WooCommerce's built-in logging system.
+
+**Enable logging:**
+```php
+define( 'PLUGIN_TPL_DEBUG', true );
+```
+
+**Usage:**
+```php
+use Xkon\Plugin_Tpl\Logger;
+
+Logger::log( 'Message' );           // Default info level
+Logger::debug( 'Debug info' );      // Debug level
+Logger::info( 'Information' );      // Info level
+Logger::warning( 'Warning' );       // Warning level
+Logger::error( 'Error occurred' );  // Error level
+```
+
+**View logs:** WooCommerce > Status > Logs (look for source: `plugin-tpl`)
+
