@@ -26,7 +26,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Nevma\\Plugin_Tpl\\": "php/"
+			"Nevma\\Plugin_Tpl\\": "src/"
 		}
 	},
 	"scripts": {

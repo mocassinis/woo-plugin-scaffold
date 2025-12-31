@@ -33,16 +33,6 @@
  */
 
 /**
- * Set namespace.
- */
-namespace Nevma;
-
-/**
- * Import necessary classes.
- */
-use Nevma\Plugin_Tpl\Admin\Menu;
-
-/**
  * Check that the file is not accessed directly.
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -66,156 +56,28 @@ add_action(
 );
 
 /**
- * Class Plugin_Tpl.
+ * Initialize the plugin.
  */
-class Plugin_Tpl {
-	/**
-	 * The plugin version.
-	 *
-	 * @var string $version
-	 */
-	public static $version;
+function plugin_tpl_init() {
+	// Composer autoload.
+	require_once __DIR__ . '/vendor/autoload.php';
 
-	/**
-	 * The plugin directory.
-	 *
-	 * @var string $dir
-	 */
-	public static $dir;
-
-	/**
-	 * The plugin url.
-	 *
-	 * @var string $url
-	 */
-	public static $url;
-
-	/**
-	 * The plugin instanace.
-	 *
-	 * @var null|Plugin_Tpl $instance
-	 */
-	private static $instance = null;
-
-	/**
-	 * Gets the plugin instance.
-	 */
-	public static function get_instance() {
-		if ( ! self::$instance ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-	}
-
-	/**
-	 * Class constructor.
-	 */
-	public function __construct() {
-		// Composer autoload.
-		require_once __DIR__ . '/vendor/autoload.php';
-
-		// Set the plugin version.
-		self::$version = '1.0.0';
-
-		// Set the plugin directory.
-		self::$dir = wp_normalize_path( plugin_dir_path( __FILE__ ) );
-
-		// Set the plugin url.
-		self::$url = plugin_dir_url( __FILE__ );
-
-		// Create the admin menus.
-		Menu::create();
-
-		// Scripts & Styles.
-		add_action( 'admin_enqueue_scripts', array( $this, 'styles_and_scripts' ) );
-
-		// Add Rest API endpoints.
-		add_action( 'rest_api_init', array( '\\Nevma\\Plugin_Tpl\\REST\\Routes', 'register' ) );
-	}
-
-	/**
-	 * Runs on plugin activation.
-	 */
-	public static function on_plugin_activation() {
-		// Use this functionality to require other plugins to be installed as well.
-
-		/*
-		$active_plugins   = apply_filters( 'active_plugins', get_option( 'active_plugins' ) );
-		$required_plugins = array(
-			'some-plugin/some-plugin.php',
-			'woocommerce/woocommerce.php',
-		);
-
-		foreach ( $required_plugins as $required_plugin ) {
-			preg_match( '#^(.*)(?:\/.*)#', $required_plugin, $matches );
-			if ( ! in_array( $required_plugin, $active_plugins, true ) ) {
-				wp_die( 'Sorry, but this plugin requires ' . $matches[1] . '. <a href="' . admin_url( 'plugins.php' ) . '">Return to Plugins.</a>' );
-			}
-		}
-		*/
-	}
-
-	/**
-	 * Styles and scripts.
-	 *
-	 * @param string $hook_suffix
-	 */
-	public function styles_and_scripts( $hook_suffix ) {
-		wp_enqueue_style(
-			'plugin-tpl',
-			self::$url . 'css/styles.css',
-			array(),
-			self::$version
-		);
-
-		wp_enqueue_script(
-			'plugin-tpl',
-			self::$url . 'js/scripts.js',
-			array( 'jquery' ),
-			self::$version,
-			true
-		);
-
-		wp_localize_script     (
-			'plugin-tpl',
-			'plugin_tpl_globals',
-			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'plugin-tpl' ),
-			)
-		);
-	}
-
-	/**
-	 * Runs on plugin deactivation.
-	 */
-	public static function on_plugin_deactivation() {
-		Logger::log( 'Deactivating plugin.' );
-	}
-
-	/**
-	 * Runs on plugin uninstall.
-	 */
-	public static function on_plugin_uninstall() {}
+	// Initialize plugin.
+	\Nevma\Plugin_Tpl\Plugin::get_instance();
 }
+add_action( 'plugins_loaded', 'plugin_tpl_init' );
 
 /**
  * Activation Hook.
  */
-register_activation_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl', 'on_plugin_activation' ) );
+register_activation_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl\\Plugin', 'activate' ) );
 
 /**
- * Dectivation Hook.
+ * Deactivation Hook.
  */
-register_deactivation_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl', 'on_plugin_deactivation' ) );
+register_deactivation_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl\\Plugin', 'deactivate' ) );
 
 /**
  * Uninstall Hook.
  */
-register_uninstall_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl', 'on_plugin_uninstall' ) );
-
-/**
- * Load plugin.
- */
-add_action( 'plugins_loaded', array( '\\Nevma\\Plugin_Tpl', 'get_instance' ) );
+register_uninstall_hook( __FILE__, array( '\\Nevma\\Plugin_Tpl\\Plugin', 'uninstall' ) );
