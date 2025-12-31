@@ -9,14 +9,14 @@
  * Requires PHP:      7.4
  * WC requires at least: 6.0
  * WC tested up to:   9.5
- * Author:            Konstantinos Xenos
- * Author URI:        https://xkon.dev
+ * Author:            Ioannis Kastorinis
+ * Author URI:        https://github.com/mocassinis
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       plugin-tpl
  *
  * Copyright (C) 2021-Present
- * Konstantinos Xenos (https://xkon.dev).
+ * Ioannis Kastorinis (https://github.com/mocassinis).
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
