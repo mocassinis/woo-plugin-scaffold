@@ -25,15 +25,40 @@ This project is a fork of [plugin-tpl](https://github.com/mrxkon/plugin-tpl) by 
    - `plugin-tpl` → your plugin slug
    - `Plugin_Tpl` → your plugin class name
    - `plugin_tpl` → your function/variable prefix
+   - `Nevma` → your namespace
 
-3. Enable WooCommerce dependency check by uncommenting lines 125-138 in `plugin-tpl.php`
+3. Update plugin headers and metadata in:
+   - `plugin-tpl.php` (Name, Description, Author, etc.)
+   - `composer.json` (name, description, namespace)
+   - `package.json` (name, description)
 
-4. Update plugin headers and metadata in:
-   - `plugin-tpl.php` (add WooCommerce version headers)
-   - `composer.json` (update namespace in autoload section)
-   - `package.json`
+4. Customize functionality:
+   - Remove unused files (e.g., `Frontend.php` if admin-only plugin)
+   - Uncomment example hooks in each class as needed
+   - Add your custom logic to the appropriate class
 
 **Note:** This template is designed for WooCommerce plugin development and includes HPOS (High-Performance Order Storage) compatibility.
+
+## Structure
+
+Simple, organized minimal architecture:
+
+```
+src/
+├── Plugin.php       # Core plugin class with initialization
+├── Admin.php        # All admin functionality (menu, settings, assets)
+├── Frontend.php     # Public-facing functionality (hooks, shortcodes)
+├── WooCommerce.php  # WooCommerce integration (products, orders, cart, checkout)
+├── API.php          # REST API endpoints and AJAX handlers
+└── functions.php    # Helper functions (logging, meta helpers, etc.)
+```
+
+**Why this structure?**
+- Only 6 files - easy to understand and navigate
+- Clear separation of concerns
+- Delete what you don't need (e.g., remove Frontend.php if not needed)
+- Each file is self-contained with related functionality
+- Simple to extend - just add methods to the appropriate class
 
 #### Available commands
 
@@ -72,13 +97,11 @@ define( 'PLUGIN_TPL_DEBUG', true );
 
 **Usage:**
 ```php
-use Nevma\Plugin_Tpl\Logger;
-
-Logger::log( 'Message' );           // Default info level
-Logger::debug( 'Debug info' );      // Debug level
-Logger::info( 'Information' );      // Info level
-Logger::warning( 'Warning' );       // Warning level
-Logger::error( 'Error occurred' );  // Error level
+plugin_tpl_log( 'Message' );                 // Default info level
+plugin_tpl_log( 'Debug info', 'debug' );     // Debug level
+plugin_tpl_log( 'Information', 'info' );     // Info level
+plugin_tpl_log( 'Warning', 'warning' );      // Warning level
+plugin_tpl_log( 'Error occurred', 'error' ); // Error level
 ```
 
 **View logs:** WooCommerce > Status > Logs (look for source: `plugin-tpl`)
