@@ -4,6 +4,10 @@ A modern, well-structured scaffold for building WooCommerce plugins with WordPre
 
 This template provides a solid foundation for WooCommerce extensions with proper code organization, linting, and build tools configured out of the box.
 
+### Credits
+
+This project is a fork of [plugin-tpl](https://github.com/mrxkon/plugin-tpl) by [Konstantinos Xenos](https://xkon.dev), enhanced with modern WooCommerce development tools and best practices.
+
 ---
 
 ![Tests](https://github.com/mrxkon/plugin-tpl/workflows/Checks/badge.svg)
